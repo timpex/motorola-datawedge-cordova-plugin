@@ -62,8 +62,9 @@ public class DataWedgeIntentHandler {
             }
 
             Log.i(TAG, "Register for Datawedge intent: " + dataWedgeAction);
-
-            applicationContext.registerReceiver(dataReceiver, new IntentFilter(dataWedgeAction));
+            Intent explicitIntent = new IntentFilter(dataWedgeAction);
+            explicitIntent.setPackage(applicationContext.getPackageName());
+            applicationContext.registerReceiver(dataReceiver, explicitIntent);
 
             enableScanner(true);
             hasInitialized = true;
